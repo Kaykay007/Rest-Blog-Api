@@ -10,6 +10,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class DeletePostResponse {
     private String message;
-    private LocalDateTime dateTime;
-    private Post post;
+    private LocalDateTime timestamp;
+
 }

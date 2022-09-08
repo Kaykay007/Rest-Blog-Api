@@ -72,21 +72,23 @@ public class UserServiceImpl implements UserService {
 
         @Override
         public CreatePostResponse createPost(PostDto postDto) {
+            System.out.println(postDto);
         Post post = new Post();
         User user = findUserById(postDto.getUser_id());
         post.setTitle(postDto.getTitle());
         post.setDescription(postDto.getDescription());
         post.setSlug(makeSlug(postDto.getTitle()));
-        post.setFeaturedImage(post.getFeaturedImage());
+        post.setFeaturedImage(postDto.getFeaturedImage());
         post.setUser(user);
         postRepository.save(post);
             return new CreatePostResponse("success" , LocalDateTime.now() , post);
         }
 
         public DeletePostResponse deletePost(int post_id){
-        Post post = findPostById(post_id);
-        postRepository.delete(post);
-        return new DeletePostResponse("success",  LocalDateTime.now(), post);
+       // Post post = findPostById(post_id);
+        postRepository.deleteById(post_id);
+       // postRepository.delete(post);
+        return new DeletePostResponse("success",  LocalDateTime.now());
         }
 
         @Override
@@ -95,8 +97,7 @@ public class UserServiceImpl implements UserService {
         User user= findUserById(user_id);
         Post post = findPostById(post_id);
         Comment comment = new Comment();
-        comment.setComment(comment.getComment());
-//        comment.setUser(comment.getUser());
+        comment.setComment(commentDto.getComment());
         comment.setUser(user);
         comment.setPost(post);
         commentRepository.save(comment);

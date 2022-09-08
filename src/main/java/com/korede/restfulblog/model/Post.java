@@ -1,6 +1,7 @@
 package com.korede.restfulblog.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -40,9 +41,11 @@ public class Post {
     private User user;
 
     @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "post")
     private List<Comment> commentList = new ArrayList<>();
 
+    @JsonIgnore
     @JsonManagedReference
         @OneToMany(mappedBy = "post")
         private List<Like> likeList = new ArrayList<>();

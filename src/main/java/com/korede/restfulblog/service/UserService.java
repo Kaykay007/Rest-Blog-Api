@@ -1,6 +1,7 @@
 package com.korede.restfulblog.service;
 
 import com.korede.restfulblog.dto.*;
+import com.korede.restfulblog.model.Post;
 import com.korede.restfulblog.response.*;
 
 public interface UserService {
@@ -19,6 +20,7 @@ public interface UserService {
     SearchCommentResponse searchComment(String keyword);
 
     SearchPostResponse searchPost(String keyword);
+    Post findPostById(int id);
 
 
 }

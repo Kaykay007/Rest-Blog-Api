@@ -14,7 +14,6 @@ import com.korede.restfulblog.repository.PostRepository;
 import com.korede.restfulblog.repository.UserRepository;
 import com.korede.restfulblog.response.*;
 import com.korede.restfulblog.service.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,8 +37,6 @@ public class UserServiceImpl implements UserService {
         this.commentRepository = commentRepository;
         this.postRepository = postRepository;
     }
-
-
 
     private  static final Pattern NONLATIN= Pattern.compile("[^\\w-]");
     private  static final Pattern WHITESPACE= Pattern.compile("[\\s]");
@@ -65,7 +62,7 @@ public class UserServiceImpl implements UserService {
              loginResponse=new LoginResponse("success" , LocalDateTime.now());
          }
         }else {
-         loginResponse = new LoginResponse("password Mismatch" , LocalDateTime.now());
+         loginResponse = new LoginResponse("password does not Match" , LocalDateTime.now());
      }
             return loginResponse;
         }
@@ -157,18 +154,14 @@ public class UserServiceImpl implements UserService {
 
     }
         public User findUserByEmail (String email){
-            return userRepository.findByEmail(email).orElseThrow( ()-> new UserNotFoundException("user with email: " + email  + "Not found "));
+            return userRepository.findUserByEmail(email).orElseThrow( ()-> new UserNotFoundException("user with email: " + email  + "Not found "));
 
         }
-
-
-
         public String makeSlug(String input) {
         String nowhitespace = WHITESPACE.matcher(input).replaceAll("-");
         String normalized = Normalizer.normalize(nowhitespace, Normalizer.Form.NFD);
         String slug = NONLATIN.matcher(normalized).replaceAll("");
         return slug.toLowerCase(Locale.ENGLISH);
  }
-
 
     }

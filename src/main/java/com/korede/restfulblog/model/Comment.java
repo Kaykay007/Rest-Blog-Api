@@ -1,10 +1,7 @@
 package com.korede.restfulblog.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,9 +12,11 @@ import java.time.LocalDateTime;
 @Table(name = "comments ")
 @Setter
 @Getter
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class Comment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  int id;
@@ -38,8 +37,6 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "user_id" , referencedColumnName = "id")
     private  User user;
-
-
 
 
 }

@@ -1,11 +1,7 @@
 package com.korede.restfulblog.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -16,6 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "likes")
 @Setter
 @Getter
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class Like {
@@ -23,8 +20,6 @@ public class Like {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  int id;
     private boolean isLiked;
-
-
 
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -41,8 +36,5 @@ public class Like {
     @ManyToOne
     @JoinColumn(name = "post_id" , referencedColumnName = "id")
     private Post post;
-
-
-
 
 }

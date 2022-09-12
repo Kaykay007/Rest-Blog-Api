@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 public interface PostRepository  extends JpaRepository<Post, Integer> {
 
+    //  @Query(value = "SELECT * FROM posts WHERE  title LIKE '%keyword%' " , nativeQuery = true)
     List<Post> findByTitleContaining(String keyword);
 }

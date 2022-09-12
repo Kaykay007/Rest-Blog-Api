@@ -8,8 +8,6 @@ import com.korede.restfulblog.dto.UserDto;
 import com.korede.restfulblog.model.Post;
 import com.korede.restfulblog.response.*;
 import com.korede.restfulblog.service.UserService;
-import com.korede.restfulblog.serviceImpl.UserServiceImpl;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,8 +28,6 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
-
 
     @PostMapping(value = "/register")
     public ResponseEntity<RegisterResponse> register(@RequestBody UserDto userDto){
@@ -56,7 +52,6 @@ public class UserController {
 
         return new ResponseEntity<>(userService.deletePost(post_id) , OK);
 
-
     }
 
     @PostMapping(value = "/comment/{user_id}/{post_id}")
@@ -66,7 +61,6 @@ public class UserController {
         return ResponseEntity.created(uri).body(userService.comment(user_id, post_id, commentDto));
 
     }
-
 
     @PostMapping(value = "/like/{user_id}/{post_id}")
     public ResponseEntity<LikeResponse> like(@PathVariable(value = "user_id") Integer user_id, @PathVariable(value = "post_id") Integer post_id, @RequestBody LikeDto likeDto){
@@ -89,6 +83,5 @@ public class UserController {
     public ResponseEntity<Post> searchComment(@PathVariable(  value = "id") Integer id){
         return ResponseEntity.ok().body(userService.findPostById(id));
     }
-
 
 }

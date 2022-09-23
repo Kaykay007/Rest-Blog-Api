@@ -69,7 +69,7 @@ class UserServiceImplTest {
         userDTO = new UserDto( "akorede" , "hameed.korede@gmail.com"  , "Admin" , "12345");
         when(userRepository.save(user)).thenReturn(user);
         RegisterResponse registerResponse = new RegisterResponse("success" , localDateTime , user);
-        var actual =  userService.register(userDTO);
+        var actual  =  userService.register(userDTO);
         actual.setTimeStamp(localDateTime);
         actual.getUser().setCreatedAt(localDateTime);
         actual.getUser().setUpdatedAt(localDateTime);
@@ -89,13 +89,14 @@ class UserServiceImplTest {
 
     @Test
     void login_IncorrectPassword() {
-        LoginDto loginDto = new LoginDto("hameed.korede@gmail.com"  , "1238745");
+        LoginDto loginDto = new LoginDto("hameed.korede@gmail.com"  , "122345");
         when(userRepository.findUserByEmail("hameed.korede@gmail.com" )).thenReturn(Optional.ofNullable(user));
         LoginResponse loginResponse = new LoginResponse("password does not Match" , localDateTime);
         var actual =  userService.login(loginDto);
         actual.setTimeStamp(localDateTime);
         assertEquals(loginResponse , actual);
     }
+
 
     @Test
     void createPost() {

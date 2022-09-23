@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
         }
 
         public DeletePostResponse deletePost(int post_id){
-       // Post post = findPostById(post_id);
+
         postRepository.deleteById(post_id);
        // postRepository.delete(post);
         return new DeletePostResponse("success",  LocalDateTime.now());
